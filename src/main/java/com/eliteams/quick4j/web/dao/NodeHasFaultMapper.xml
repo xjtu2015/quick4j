@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eliteams.quick4j.web.dao.NodeHasFaultMapper" >
+  <resultMap id="BaseResultMap" type="com.eliteams.quick4j.web.model.NodeHasFaultKey" >
+    <id column="Fault_FaultId" property="faultFaultid" jdbcType="BIGINT" />
+    <id column="Node_NodeId" property="nodeNodeid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Fault_FaultId, Node_NodeId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eliteams.quick4j.web.model.NodeHasFaultExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from node_has_fault
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.eliteams.quick4j.web.model.NodeHasFaultKey" >
+    delete from node_has_fault
+    where Fault_FaultId = #{faultFaultid,jdbcType=BIGINT}
+      and Node_NodeId = #{nodeNodeid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.eliteams.quick4j.web.model.NodeHasFaultExample" >
+    delete from node_has_fault
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.eliteams.quick4j.web.model.NodeHasFaultKey" >
+    insert into node_has_fault (Fault_FaultId, Node_NodeId)
+    values (#{faultFaultid,jdbcType=BIGINT}, #{nodeNodeid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eliteams.quick4j.web.model.NodeHasFaultKey" >
+    insert into node_has_fault
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="faultFaultid != null" >
+        Fault_FaultId,
+      </if>
+      <if test="nodeNodeid != null" >
+        Node_NodeId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="faultFaultid != null" >
+        #{faultFaultid,jdbcType=BIGINT},
+      </if>
+      <if test="nodeNodeid != null" >
+        #{nodeNodeid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.eliteams.quick4j.web.model.NodeHasFaultExample" resultType="java.lang.Integer" >
+    select count(*) from node_has_fault
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update node_has_fault
+    <set >
+      <if test="record.faultFaultid != null" >
+        Fault_FaultId = #{record.faultFaultid,jdbcType=BIGINT},
+      </if>
+      <if test="record.nodeNodeid != null" >
+        Node_NodeId = #{record.nodeNodeid,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update node_has_fault
+    set Fault_FaultId = #{record.faultFaultid,jdbcType=BIGINT},
+      Node_NodeId = #{record.nodeNodeid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

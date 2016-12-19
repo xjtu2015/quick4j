@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eliteams.quick4j.web.dao.CorelationMapper" >
+  <resultMap id="BaseResultMap" type="com.eliteams.quick4j.web.model.Corelation" >
+    <id column="Rel_id" property="relId" jdbcType="BIGINT" />
+    <result column="relationName" property="relationname" jdbcType="VARCHAR" />
+    <result column="SourId" property="sourid" jdbcType="BIGINT" />
+    <result column="TargId" property="targid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Rel_id, relationName, SourId, TargId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.eliteams.quick4j.web.model.CorelationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from corelation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from corelation
+    where Rel_id = #{relId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from corelation
+    where Rel_id = #{relId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.eliteams.quick4j.web.model.CorelationExample" >
+    delete from corelation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.eliteams.quick4j.web.model.Corelation" >
+    insert into corelation (Rel_id, relationName, SourId, 
+      TargId)
+    values (#{relId,jdbcType=BIGINT}, #{relationname,jdbcType=VARCHAR}, #{sourid,jdbcType=BIGINT}, 
+      #{targid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eliteams.quick4j.web.model.Corelation" >
+    insert into corelation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="relId != null" >
+        Rel_id,
+      </if>
+      <if test="relationname != null" >
+        relationName,
+      </if>
+      <if test="sourid != null" >
+        SourId,
+      </if>
+      <if test="targid != null" >
+        TargId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="relId != null" >
+        #{relId,jdbcType=BIGINT},
+      </if>
+      <if test="relationname != null" >
+        #{relationname,jdbcType=VARCHAR},
+      </if>
+      <if test="sourid != null" >
+        #{sourid,jdbcType=BIGINT},
+      </if>
+      <if test="targid != null" >
+        #{targid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.eliteams.quick4j.web.model.CorelationExample" resultType="java.lang.Integer" >
+    select count(*) from corelation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update corelation
+    <set >
+      <if test="record.relId != null" >
+        Rel_id = #{record.relId,jdbcType=BIGINT},
+      </if>
+      <if test="record.relationname != null" >
+        relationName = #{record.relationname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sourid != null" >
+        SourId = #{record.sourid,jdbcType=BIGINT},
+      </if>
+      <if test="record.targid != null" >
+        TargId = #{record.targid,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update corelation
+    set Rel_id = #{record.relId,jdbcType=BIGINT},
+      relationName = #{record.relationname,jdbcType=VARCHAR},
+      SourId = #{record.sourid,jdbcType=BIGINT},
+      TargId = #{record.targid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eliteams.quick4j.web.model.Corelation" >
+    update corelation
+    <set >
+      <if test="relationname != null" >
+        relationName = #{relationname,jdbcType=VARCHAR},
+      </if>
+      <if test="sourid != null" >
+        SourId = #{sourid,jdbcType=BIGINT},
+      </if>
+      <if test="targid != null" >
+        TargId = #{targid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where Rel_id = #{relId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eliteams.quick4j.web.model.Corelation" >
+    update corelation
+    set relationName = #{relationname,jdbcType=VARCHAR},
+      SourId = #{sourid,jdbcType=BIGINT},
+      TargId = #{targid,jdbcType=BIGINT}
+    where Rel_id = #{relId,jdbcType=BIGINT}
+  </update>
+</mapper>
